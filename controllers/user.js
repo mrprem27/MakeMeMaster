@@ -110,14 +110,15 @@ const checkUser = async (req, res) => {
             }
         }
         const token = jwt.sign(payload, SECRET_KEY, { expiresIn: '720hr' });
-        // res.cookie('tkn', token, {
-        //     secure: true,
-        //     sameSite: 'none',
-        //     httpOnly: true,
-        //     maxAge: 2592000000,
-        // });
+        res.cookie('tkn', token, {
+            secure: true,
+            sameSite: 'none',
+            httpOnly: true,
+            maxAge: 2592000000,
+        });
         res.status(200).json({ message: true, userId: user._id, username: user.fullname });
     } catch (error) {
+        console.log(error);
         res.status(409).json({ message: false, error: error.message });
     }
 };
