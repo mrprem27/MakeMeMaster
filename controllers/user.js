@@ -113,7 +113,8 @@ const checkUser = async (req, res) => {
         res.cookie('tkn', token, {
             secure: true,
             sameSite:'none',
-            httpOnly: true
+            httpOnly: true,
+            maxAge: 2592000000,
         });
         res.status(200).json({ message: true, userId: user._id, username: user.fullname });
     } catch (error) {
